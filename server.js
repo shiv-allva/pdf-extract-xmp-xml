@@ -110,4 +110,21 @@ app.post('/upload', upload.single('pdf'), async (req, res) => {
       utf8text = xmp;
     }
 
-    res.setHeader('Content-Di
+    res.setHeader('Content-Disposition', `attachment; filename="${outName}"`);
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    res.send(utf8text);
+  } catch (err) {
+    console.error(err);
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(413).json({ error: 'File too large. Max allowed = 20 MB.' });
+    }
+    res.status(500).json({ error: 'Internal error' });
+  } finally {
+    try { fs.unlinkSync(filePath); } catch (e) {}
+  }
+});
+
+app.get('/health', (req, res) => res.json({ ok: true }));
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
