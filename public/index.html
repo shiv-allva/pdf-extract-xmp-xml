@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PDF → XMP Extractor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <h1>PDF → XMP extractor</h1>
+
+    <div id="drop-area" class="drop">
+      <div class="icon">📄</div>
+      <div class="prompt">Drag & drop a PDF here</div>
+      <div class="or">or</div>
+      <label class="btn">Choose a file<input id="fileElem" type="file" accept="application/pdf"></label>
+      <div class="hint">Max file size: 20 MB</div>
+    </div>
+
+    <div id="meta" class="meta hidden">
+      <div id="file-info"></div>
+      <button id="uploadBtn" class="btn primary">Upload & Extract XMP</button>
+      <div id="status" class="status"></div>
+    </div>
+    <footer class="foot">Run locally or deploy to Render / Railway / Vercel (see README)</footer>
+  </main>
+  <script src="/script.js"></script>
+</body>
+</html>
